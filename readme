@@ -1,0 +1,44 @@
+#install your ros env before build, test on ros noetic fine
+
+#install rtcm and nmea msgs
+sudo apt install ros-noetic-rtcm-msgs
+sudo apt install ros-noetic-nmea-msgs
+
+# build ublox driver with unicore ComponentInterface 
+cd ~/catkin_ws
+catkin_make
+
+#build ntrip client
+cd ~/catkin_ntrip_ws
+catkin_make
+
+## launch ublox_gps ,open a terminal 
+
+#step1
+cd ~/catkin_ws
+#step2
+source  devel/setup.bash
+#step3
+roslaunch ublox_gps ublox_device.launch node_name:=ublox param_file_name:=um982_rover
+
+## config your ntrip account,need set your host port user password ...etc
+confg file is: 
+~/catkin_ntrip_ws/src/ntrip_client/launch/ntrip_client.launch
+
+##launch ntrip client,
+
+step1:
+cd ~/catkin_ntrip_ws
+step2:
+source  devel/setup.bash
+step3:
+roslaunch ntrip_client ntrip_client.launch
+
+
+##check the ros topic 
+
+rostopic echo /ublox/fix
+rostopic echo /ublox/nmea
+rostopic echo /ublox/rxmrtcm
+rostopic echo /ublox/rxmraw
+

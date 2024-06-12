@@ -1,0 +1,30 @@
+# Configuration Settings for UM982 device
+debug: 3                 # Range 0-4 (0 means no debug statements will print)
+
+device: /dev/ttyUSB0    #  UM982 rover serial port
+frame_id: gps
+rate: 5                     # in Hz
+nav_rate: 5                 # [# of measurement cycles], recommended 5 Hz
+unicore_oem: 1              # set 1 if use unicore oem
+config_on_startup: true    # cfg chip
+
+uart1:
+  baudrate: 115200       # serial port baudrate
+  in: 32
+  out: 3
+uart_index: 1            # uart1-3 for unicore 
+# Enable u-blox message publishers
+publish:
+  all: false
+  nmea: true            # enable GGA 1hz for ntrip client
+  nav:
+    all: true
+    relposned: true
+    posllh: true
+    posecef: true
+    bestpos: true
+  rxm:
+    all: false
+    raw: true           # publish rxmraw or rxmrawx base on f9p feature
+    rangcmp: true       # uicore ramgcmp 
+
